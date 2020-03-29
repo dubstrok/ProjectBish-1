@@ -148,7 +148,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
                                          "./downloads")
 
 # Terminal Alias
-TERM_ALIAS = os.environ.get("TERM_ALIAS", None)
+TERM_ALIAS = os.environ.get("ALIVE_NAME", None)
 
 # Genius Lyrics API
 GENIUS = os.environ.get("GENIUS_ACCESS_TOKEN", None)
