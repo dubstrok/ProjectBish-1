@@ -120,7 +120,7 @@ async def set_afk(afk_e):
     global ISAFK
     global AFKREASON
     if string:
-        AFKREASON = string
+        string = AFKREASON
         await afk_e.edit(f"Going AFK!"
                          "\nReason: `{string}`")
     else:
