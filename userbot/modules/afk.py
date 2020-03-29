@@ -1,6 +1,6 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
+# Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 #
 """ Userbot module which contains afk-related commands """
@@ -54,7 +54,7 @@ async def mention_afk(mention):
             if mention.sender_id not in USERS:
                 if AFKREASON:
                     await mention.reply(f"I'm AFK right now.\
-                        \nBecause I'm `{AFKREASON}`")
+                        \nReason: `{AFKREASON}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
                 USERS.update({mention.sender_id: 1})
@@ -120,9 +120,9 @@ async def set_afk(afk_e):
     global ISAFK
     global AFKREASON
     if string:
-        string = AFKREASON
-        await afk_e.edit(f"Going AFK!"
-                         "\nReason: `{string}`")
+        AFKREASON = string
+        await afk_e.edit(f"Going AFK!\
+        \nReason: `{string}`")
     else:
         await afk_e.edit("Going AFK!")
     if BOTLOG:
@@ -140,8 +140,9 @@ async def type_afk_is_not_true(notafk):
     global AFKREASON
     if ISAFK:
         ISAFK = False
-        await notafk.respond("I'm no longer AFK.")
-        await sleep(2)
+        msg = await notafk.respond("I'm no longer AFK.")
+        await sleep(1)
+        await msg.delete()
         if BOTLOG:
             await notafk.client.send_message(
                 BOTLOG_CHATID,
@@ -163,8 +164,8 @@ async def type_afk_is_not_true(notafk):
 
 CMD_HELP.update({
     "afk":
-    ">`.afk [Optional Reason]`"
-    "\nUsage: Sets you as afk.\nReplies to anyone who tags/PM's "
-    "you telling them that you are AFK(reason)."
-    "\n\nSwitches off AFK when you type back anything, anywhere."
+    ".afk [Optional Reason]\
+\nUsage: Sets you as afk.\nReplies to anyone who tags/PM's \
+you telling them that you are AFK(reason).\n\nSwitches off AFK when you type back anything, anywhere.\
+"
 })
