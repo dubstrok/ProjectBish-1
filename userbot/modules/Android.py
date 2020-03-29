@@ -14,7 +14,7 @@ from userbot.events import register
 
 GITHUB = 'https://github.com'
 DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/' \
-               'certified-android-devices/master/by_devices.json'
+               'certified-android-devices/master/devices.json'
 
 
 @register(outgoing=True, pattern="^.magisk$")
