@@ -1,3 +1,4 @@
+covid
 ffmpeg
 aiohttp
 aria2p
