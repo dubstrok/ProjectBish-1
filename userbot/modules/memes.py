@@ -606,8 +606,9 @@ HIT = [
     
 ]
 
-WHERE = ["di Neraka, di gunung Merapi yang sedang meledak, di Mulut ular raksasa, di Blacklit Database internet"]
+WHERE = ["di Neraka", "di gunung Merapi yang sedang meledak", "di Mulut ular raksasa", "di Blacklist Database internet"]
 
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ===========================================
 
 
@@ -700,7 +701,7 @@ async def slap(replied_user, event):
     throw = choice(THROW)
     where = choice(WHERE)
 
-    caption = "..." + temp.format(
+    caption = f"{DEFAULTUSER}" + temp.format(
         victim=slapped, item=item, hits=hit, throws=throw, where=where)
 
     return caption
