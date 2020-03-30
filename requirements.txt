@@ -1,3 +1,4 @@
+github
 covid
 ffmpeg
 aiohttp
