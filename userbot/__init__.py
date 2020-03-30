@@ -73,6 +73,7 @@ HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 
 #Github Akses Token
 GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
+GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
 
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = os.environ.get(
