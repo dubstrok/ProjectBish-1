@@ -1,0 +1,49 @@
+========== DISCLAIMER ==========
+This file uploaded ONLY here,
+we logged only fact of error and date,
+we respect your privacy,
+you may not report this error if you've
+any confidential data here, no one will see your data
+================================
+
+--------BEGIN USERBOT TRACEBACK LOG--------
+
+Date: 2020-03-31 04:54:01
+Chat ID: -1001173950716
+Sender ID: 941792071
+
+Event Trigger:
+.gdrive
+
+Traceback info:
+Traceback (most recent call last):
+  File "/home/projectbish/userbot/events.py", line 64, in wrapper
+    await func(check)
+  File "/home/projectbish/userbot/modules/gdrive.py", line 140, in gdrive_upload_function
+    storage = await create_token_file(G_DRIVE_TOKEN_FILE, dryb)
+  File "/home/projectbish/userbot/modules/gdrive.py", line 273, in create_token_file
+    credentials = flow.step2_exchange(code)
+  File "/usr/lib/python3.8/site-packages/oauth2client/_helpers.py", line 133, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/usr/lib/python3.8/site-packages/oauth2client/client.py", line 2089, in step2_exchange
+    raise FlowExchangeError(error_msg)
+oauth2client.client.FlowExchangeError: invalid_grantMalformed auth code.
+
+
+Error text:
+invalid_grantMalformed auth code.
+
+--------END USERBOT TRACEBACK LOG--------
+
+
+Last 10 commits:
+rizpedia: Modules : add alive name in slap
+rizpedia: Modules : add alive name in slap
+rizpedia: Modules : slap translate to Indonesian
+rizpedia: memes : update
+rizpedia: Module : add figlet
+rizpedia: Delete memes.py
+rizpedia: __init__.py : add ZALG_LIST
+rizpedia: Uploaded New Plugin
+rizpedia: Uploaded New Plugin
+rizpedia: Requirements : add module pyfiglet
