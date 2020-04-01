@@ -11,6 +11,7 @@ import codecs
 import asyncio
 import math
 import time
+import binascii
 from os.path import isfile, isdir
 from mimetypes import guess_type
 
@@ -221,8 +222,10 @@ async def folders(gdrive):
 @register(pattern="^.gd(?: |$)(.*)", outgoing=True)
 async def google_drive(gdrive):
     """ - Parsing all google drive function - """
-    service = await create_app(gdrive)
     file_path = gdrive.pattern_match.group(1)
+    if not file_path and not gdrive.reply_to_msg_id:
+        return
+    service = await create_app(gdrive)
     if not file_path and gdrive.reply_to_msg_id:
         return await download(gdrive, service)
     mimeType = await get_mimeType(file_path)
@@ -359,16 +362,31 @@ async def generate_credentials(gdrive):
         }
     }
     creds = None
-    if G_DRIVE_AUTH_TOKEN_DATA is not None:
-        """ - Repack credential objects from strings - """
-        creds = pickle.loads(
-              codecs.decode(G_DRIVE_AUTH_TOKEN_DATA.encode(), "base64"))
-    else:
-        if isfile("auth.txt"):
-            """ - Load credentials from file if exists - """
-            with open("auth.txt", "r") as token:
-                creds = token.read()
-                creds = pickle.loads(codecs.decode(creds.encode(), "base64"))
+    try:
+        if G_DRIVE_AUTH_TOKEN_DATA is not None:
+            """ - Repack credential objects from strings - """
+            creds = pickle.loads(
+                  codecs.decode(G_DRIVE_AUTH_TOKEN_DATA.encode(), "base64"))
+        else:
+            if isfile("auth.txt"):
+                """ - Load credentials from file if exists - """
+                with open("auth.txt", "r") as token:
+                    creds = token.read()
+                    creds = pickle.loads(
+                          codecs.decode(creds.encode(), "base64"))
+    except binascii.Error as e:
+        return await gdrive.edit(
+            "`[TOKEN - ERROR]`\n\n"
+            " • `Status :` **BAD**\n"
+            " • `Reason :` Invalid credentials or token data\n"
+            f"   -> `{str(e)}`\n\n"
+            "`if you copy paste from 'auth.txt' file and still error "
+            "try use MiXlorer file manager and open as code editor or "
+            "if you don't want to download just run command`\n"
+            ">`term cat auth.txt`\n"
+            "Cp and paste to `G_DRIVE_AUTH_TOKEN_DATA` heroku ConfigVars or\n"
+            ">`set var G_DRIVE_AUTH_TOKEN_DATA <token you get>`"
+        )
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             await gdrive.edit("`Refreshing credentials...`")
@@ -397,9 +415,9 @@ async def generate_credentials(gdrive):
                   events.NewMessage(outgoing=True, chats=BOTLOG_CHATID))
                 r = await r
                 code = r.message.message.strip()
-                await msg.delete()
                 flow.fetch_token(code=code)
                 creds = flow.credentials
+            await msg.delete()
             """ - Unpack credential objects into strings - """
             if G_DRIVE_AUTH_TOKEN_DATA is None:
                 with open("auth.txt", "w") as f:
@@ -419,7 +437,7 @@ async def generate_credentials(gdrive):
                 "`The next time you called the command you didn't need to "
                 "authenticate anymore as long there is a valid file 'auth.txt'"
                 " or, you already put the value from 'auth.txt'"
-                " to your heroku app ConfigVars.`"
+                " to your heroku app ConfigVars.` **G_DRIVE_AUTH_TOKEN_DATA**"
             )
             await asyncio.sleep(3.5)
             await msg.delete()
