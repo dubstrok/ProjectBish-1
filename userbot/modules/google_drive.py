@@ -404,7 +404,7 @@ async def generate_credentials(gdrive):
             auth_url, _ = flow.authorization_url(
                         access_type='offline', prompt='consent')
             msg = await gdrive.respond(
-                "`Go to your BOTLOG chat to authenticate` **G_DRIVE_TOKEN_DATA**"
+                "`Go to your BOTLOG chat to authenticate` **G_DRIVE_AUTH_TOKEN_DATA**"
             )
             async with gdrive.client.conversation(BOTLOG_CHATID) as conv:
                 await conv.send_message(
