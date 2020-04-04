@@ -56,8 +56,6 @@ RUN apk add --no-cache=true --update \
     zlib-dev \
     jpeg \
     zip \
-    megatools \
-    nodejs \
     freetype-dev
 
 RUN python3 -m ensurepip \
@@ -78,4 +76,5 @@ WORKDIR /home/projectbish/
 # Install requirements
 #
 RUN pip3 install -r requirements.txt
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 CMD ["python3","-m","userbot"]
