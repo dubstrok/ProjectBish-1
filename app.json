@@ -17,6 +17,10 @@
       "description": "Get this value from my.telegram.org.",
       "required": true
     },
+     "ALIVE_NAME": {
+      "description": "Bebar mau diisi apa.",
+      "required": true
+    },
     "API_HASH": {
       "description": "Get this value from my.telegram.org.",
       "required": true
