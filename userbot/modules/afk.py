@@ -20,21 +20,21 @@ AFKSTR = [
     "Saya sedang tidak online sekarang. Jika memang penting, Tinggalkan pesan setelah bunyi beep:\n`beeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep`!",
     "Mungkin belum saatnya kita bertemu.",
     "Aku Akan Balik Sebentar Lagi dan Jika tidak...,\ntunggulah lebih lama :v.",
-    "Aku sedang tidak disini. /nYang pasti Aku sedang berada di suatu tempat.",
-    "Bunga Ros merah ,\nViolet Yang biru ,\nTinggalkan aku sebuah pesan ,\nDan aku akan kembali kepadamu.",
-    "Aku pergi 7 lautan dan 7 Tempat ,\n7 Perairan dan 7 benua ,\n7 Gunung Dan 7 Bukit ,\n7 dataran dan 7 Kali mount di Twrp ,\n7 kolam dan 7 apalah pusing gw,\ndah gw capek Jangan Maksa ,/n Tungguin Aja Yang punya akun Onlen",
-    "I'm away from the keyboard at the moment, but if you'll scream loud enough at your screen, I might just hear you.",
-    "Aku ingin Jalan Ini\n---->",
-    "Aku inginJalan ini\n<----",
+    "Aku sedang tidak disini. \nYang pasti Aku sedang berada di suatu tempat.",
+    "Aku bukan orang yang spesial tapi aku selalu ada bersamamu,Kecuali sekarang aja sih.",
+    "Ada 3 hal di duinia ini yang tidak bisa kuhitung, jumlah bintang di langit, ikan di laut dan cintaku padamu",
+    "Rasa sayangku ke kamu kaya pas powerangers waktu gak ada monster nggak berubah.",
+    "Coba cari aku kearah ini\n---->",
+    "Coba cari aku kearah ini\n<----",
     "Mohon Tinggalkan Pesan Yang penting kepadaku, Jika Tak Penting Ya udah Â¯\_(ãƒ„)_/Â¯.",
-    "I am not here so stop writing to me,\nor else you will find yourself with a screen full of your own messages.",
-    "Jika Aku Onlen,\nAku bakal memberitahumu dimana aku.\n\nTapi aku tidak, \nJadi tanyakan aku saat aku kembali...",
+    "Sudah! Jangan ada hubungan lagi, Aku tau kau selingkuh!.",
+    "Jika Aku Onlen,Aku bakal memberitahumu dimana aku.\nTapi aku tidak, \nJadi tanyakan aku saat aku kembali...",
     "Aku Pergi!\nAku tidak tahu kapan aku kembali!\nKuharap Beberapa menit setelah pesan ini!",
-    "Ane lagi Gak Ada Sekarang :(, /nJadi Harap lampirkan Namamu, alamatmu, Username kamu, dan nomormu.",
-    "Maap Yak, Ane Lagi kagak Disini .\nJadi Rasakan Kebebasan Mengobrol Dengan Userbot Ku ini.\nDan Aku akan kembali sebentar lagi.",
+    "Ane lagi Gak Ada Sekarang :(, \nJadi Harap lampirkan Nama pacarmu, alamat pacarmu, nomor wa pacarmu, dan sertakan gambarnya ya!",
+    "Maap Yak, Ane Lagi kagak Disini,\nJadi Rasakan Kebebasan Mengobrol Dengan Userbot Ku ini.\nDan Aku akan kembali sebentar lagi.",
     "Aku Yakin Kamu Menunggu pesan balasan dariku!",
-    "Hidup sangatlah singkat, /n Jadi Perbanyak lah hidup ini dengan ibadah..",
-    "Aku tidak disini sekarang..\nTetapi Jika Aku disini...\n\n Tak akan itukah luar biasa?",
+    "Hidup sangatlah singkat,\nPerbanyak lah hidup ini dengan ibadah..\nJangan nonton JAV mulu!",
+    "Aku tidak disini sekarang..\nTetapi Jika Aku disini...\nMemang kamu mau menjalin hubungan kembali denganku?",
 ]
 # =================================================================
 
@@ -49,7 +49,7 @@ async def mention_afk(mention):
         if ISAFK:
             if mention.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply(f"Maap Ane AFK Sekarang!.\
+                    await mention.reply(f"Saya AFK Sekarang!.\
                         \nKarena: `{AFKREASON}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
