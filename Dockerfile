@@ -1,52 +1,66 @@
 # We're using Alpine Edge
-FROM python:3.8.2-buster
+FROM alpine:edge
+
+#
+# We have to uncomment Community repo for some packages
+#
+RUN sed -e 's;^#http\(.*\)/edge/community;http\1/edge/community;g' -i /etc/apk/repositories
+
 #
 # Installing Packages
 #
-RUN apt update && apt upgrade -y
-RUN apt install -y \
-coreutils \
-bash \
-build-essential \
-bzip2 \
-libbz2-dev \
-curl \
-figlet \
-gcc \
-g++ \
-git \
-sudo \
-aria2 \
-util-linux \
-dlang-libevent \
-libffi-dev \
-libpq-dev \
-libwebp-dev \
-libxml2 \
-libxml2-dev \
-libxslt1-dev \
-linux-headers-amd64 \
-musl \
-neofetch \
-libssl-dev \
-postgresql \
-openssl \
-pv \
-jq \
-libreadline-dev \
-sqlite3 \
-libsqlite3-0 \
-ffmpeg \
-chromium \
-chromium-driver \
-zlib1g \
-zlib1g-dev \
-libjpeg-turbo-progs \
-libjpeg62-turbo \
-libjpeg62-turbo-dev \
-libjpeg-dev \
-zip \
-freetype2-demos
+RUN apk add --no-cache=true --update \
+    coreutils \
+    bash \
+    build-base \
+    bzip2-dev \
+    curl \
+    figlet \
+    gcc \
+    g++ \
+    git \
+    aria2 \
+    util-linux \
+    libevent \
+    jpeg-dev \
+    libffi-dev \
+    libpq \
+    libwebp-dev \
+    libxml2 \
+    libxml2-dev \
+    libxslt-dev \
+    linux-headers \
+    musl \
+    neofetch \
+    openssl-dev \
+    postgresql \
+    postgresql-client \
+    postgresql-dev \
+    openssl \
+    pv \
+    jq \
+    wget \
+    python3 \
+    python3-dev \
+    readline-dev \
+    sqlite \
+    ffmpeg \
+    sqlite-dev \
+    sudo \
+    chromium \
+    chromium-chromedriver \
+    zlib-dev \
+    jpeg \
+    zip \
+    freetype-dev
+
+RUN python3 -m ensurepip \
+    && pip3 install --upgrade pip setuptools \
+    && rm -r /usr/lib/python*/ensurepip && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
+    rm -r /root/.cache
+
 #
 # Clone repo and prepare working directory
 #

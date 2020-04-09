@@ -44,7 +44,6 @@ telethon
 telethon-session-sqlalchemy
 urbandict
 wikipedia
-coffeehouse
 telegraph
 python-dateutil
 git+https://github.com/johnwmillr/LyricsGenius.git
