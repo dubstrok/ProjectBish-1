@@ -8,8 +8,10 @@
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/rizpedia/ProjectBish/tree/master"> <img src="https://telegra.ph/file/8947aee09ce5121b70896.png" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
-<p align="center">Special thanks to <a href="https://lonami.dev/">lonami</a> for creating <a href="https://github.com/lonamiwebs/Telethon">Telethon</a>
+<<<<<<< HEAD
+<p align="center">Huge thanks to <a href="https://github.<p align="center">Special thanks to <a href="https://lonami.dev/">lonami</a> for creating <a href="https://github.com/lonamiwebs/Telethon">Telethon</a>
 <p align="center">Huge thanks to <a href="https://github.com/adekmaulana/ProjectBish/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
+>>>>>>> 7380cc4f6bd93bb70a6200bcdc196b05667bd240
 <p align="center">&nbsp;</p>
 <h2 align="center">Setting up Google Drive</h2>
 <p align="center"><a href="https://telegra.ph/How-To-Setup-Google-Drive-04-03">README</a></p>
