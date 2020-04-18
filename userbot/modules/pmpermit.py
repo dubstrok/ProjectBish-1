@@ -18,7 +18,6 @@ from userbot.events import register
 # ========================= CONSTANTS ============================
 UNAPPROVED_MSG = (
     "`Hai, Ini pesan otomatis dari bot.\n`"
-    "`Mungkin kamu baru pertama kali chat yee?.\n`"
     "`Mohon tunggu majikanku membalas.\n`"
     "`Tolong untuk jangan spam ok! SPAM = BLOCK!`")
 # =================================================================
@@ -69,8 +68,8 @@ async def permitpm(event):
 
                 if COUNT_PM[event.chat_id] > 4:
                     await event.respond(
-                        "`You were spamming my Mastor's PM, which I didn't like.`\n"
-                        "`You have been BLOCKED and reported as SPAM, until further notice.`"
+                        "`Kamu telah melakukan Spam kepada majikan saya.`\n"
+                        "`Kamu telah saya Blok dan saya laporkan kepada telegram dengan alasan spaming!`"
                     )
 
                     try:
@@ -180,7 +179,7 @@ async def approvepm(apprvpm):
     except IntegrityError:
         return await apprvpm.edit("`Sudah diapprove kok`")
 
-    await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approved to PM!`")
+    await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `diterima untuk mengirim pesan!`")
 
     async for message in apprvpm.client.iter_messages(apprvpm.chat_id,
                                                       from_user='me',
@@ -213,7 +212,7 @@ async def disapprovepm(disapprvpm):
         name0 = str(aname.first_name)
 
     await disapprvpm.edit(
-        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `diterima untuk mengirim pesan!`")
+        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `dilarang untuk mengirim pesan!`")
 
     if BOTLOG:
         await disapprvpm.client.send_message(
