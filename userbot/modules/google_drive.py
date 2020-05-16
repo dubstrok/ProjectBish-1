@@ -31,7 +31,7 @@ import logging
 import userbot.modules.sql_helper.google_drive_sql as helper
 
 from bs4 import BeautifulSoup
-from os.path import isfile, isdir, join
+from os.path import isfile, isdir, join, getctime
 from mimetypes import guess_type
 
 from telethon import events
@@ -216,6 +216,7 @@ async def get_mimeType(name):
 
 
 async def download(gdrive, service, uri=None):
+    global is_cancelled
     reply = ''
     """ - Download files to local then upload - """
     if not isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -249,14 +250,26 @@ async def download(gdrive, service, uri=None):
     else:
         try:
             current_time = time.time()
+            is_cancelled = False
             downloaded_file_name = await gdrive.client.download_media(
                 await gdrive.get_reply_message(),
                 TEMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop(
                 ).create_task(progress(d, t, gdrive, current_time,
-                                       "[FILE - DOWNLOAD]")))
-        except Exception as e:
-            await gdrive.edit(str(e))
+                                       "[FILE - DOWNLOAD]",
+                                       is_cancelled=is_cancelled)))
+        except CancelProcess:
+            names = []
+            for name in os.listdir(TEMP_DOWNLOAD_DIRECTORY):
+                names.append(join(TEMP_DOWNLOAD_DIRECTORY, name))
+            """ asumming newest files are the cancelled one """
+            newest = max(names, key=getctime)
+            os.remove(newest)
+            reply += (
+                "`[FILE - CANCELLED]`\n\n"
+                "`Status` : **OK** - received signal cancelled."
+            )
+            return reply
         else:
             required_file_name = downloaded_file_name
     try:
@@ -1293,9 +1306,11 @@ CMD_HELP.update({
     "\nThis only need to run once in life time."
     "\n\n>`.gdreset`"
     "\nUsage: reset your token if something bad happened or change drive acc."
-    "\n\n>.`gd`"
+    "\n\n>`.gd`"
     "\nUsage: Upload file from local or uri/url/drivelink into google drive."
     "\nfor drivelink it's upload only if you want to."
+    "\n\n>`.gdabort`"
+    "\nUsage: Abort process uploading or downloading."
     "\n\n>`.gdlist`"
     "\nUsage: Get list of folders and files with default size 50."
     "\nUse flags `-l range[1-1000]` for limit output."
